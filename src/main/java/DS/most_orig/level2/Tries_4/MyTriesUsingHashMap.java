@@ -1,0 +1,37 @@
+package DS.most_orig.level2.Tries_4;
+
+import java.util.HashMap;
+
+public class MyTriesUsingHashMap {
+
+    private class Node {
+        private char value;
+        private HashMap<Character, Node> children = new HashMap<>();
+        private boolean isEndOfWord;
+
+        public Node(char value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "value=" + value;
+        }
+
+    }
+
+    private Node root = new Node(' ');
+
+    public void insert(String word){
+        Node current = root;
+        for(char ch : word.toCharArray()){
+            if(!current.children.containsKey(ch)){
+                current.children.put(ch , new Node(ch));
+            }
+            current = current.children.get(ch);
+        }
+        current.isEndOfWord= true;
+    }
+
+
+}

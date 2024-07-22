@@ -2,15 +2,18 @@ package Patterns;
 
 public class SingletonJava {
 
-    private static  SingletonJava singletonJava = null;
+    private static volatile SingletonJava instance ;
 
     private SingletonJava (){
 
     }
 
-    public  static synchronized SingletonJava getInstance(){
-        if(singletonJava ==null)
-            singletonJava = new SingletonJava();
-        return  singletonJava;
+    public  static SingletonJava getInstance(){
+        if(instance ==null)
+            synchronized (SingletonJava.class){
+                if(instance ==null)
+                    instance = new SingletonJava();
+            }
+        return  instance;
     }
 }
